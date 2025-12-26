@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成员详情 - 秋烬去</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 导航栏 -->
+    <div class="nav">
+      <a href="index.html">首页</a>
+      <a href="about.html">百业介绍</a>
+      <a href="members.html">成员展示</a>
+    </div>
+
+    <div class="member-detail" id="memberDetail">
+      <!-- 内容由JS动态填充 -->
+    </div>
+
+    <a href="members.html" class="btn">返回成员列表</a>
+  </div>
+
+  <script>
+    // 获取URL参数
+    function getUrlParam(name) {
+      const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`);
+      const r = window.location.search.substr(1).match(reg);
+      return r ? decodeURIComponent(r[2]) : '';
+    }
+
+    // 填充成员详情
+    window.onload = function() {
+      const name = getUrlParam('name');
+      const avatar = getUrlParam('avatar');
+      const roleImg = getUrlParam('roleImg');
+
+      const detailContainer = document.getElementById('memberDetail');
+      detailContainer.innerHTML = `
+        <h1>${name}</h1>
+        <img src="${avatar}" alt="${name}头像" class="member-avatar">
+        <h2>角色展示</h2>
+        <img src="${roleImg}" alt="${name}角色" class="member-role-img">
+        <p>所属百业：秋烬去</p>
+        <p>擅长玩法：可根据实际情况补充（如PVE、PVP、休闲采集等）</p>
+      `;
+    };
+  </script>
+</body>
+</html>
